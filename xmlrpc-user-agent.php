@@ -13,15 +13,12 @@ $xua_is_xmlrpc_new_post = false;
 function xua_xmlrpc_call( $method ) {
     global $xua_is_xmlrpc_new_post;
     $xua_is_xmlrpc_new_post = true;
-    echo "xua_newPost\n";
 }
 add_action( 'xmlrpc_call', 'xua_xmlrpc_call', 10, 1 );
 
 function xua_insert_post( $post_ID, $post ) {
     global $xua_is_xmlrpc_new_post;
-    echo "xua_insert_post\n";
     if ( $xua_is_xmlrpc_new_post && $_SERVER['HTTP_USER_AGENT'] ) {
-        echo "xua_insert_post/meta\n";
         add_post_meta( $post_ID, '_xua_user_agent', $_SERVER['HTTP_USER_AGENT'], true );
     }
 }
